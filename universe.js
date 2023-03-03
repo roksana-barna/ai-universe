@@ -1,29 +1,17 @@
-const loadtool =(dataLimit) =>{
-    url=`https://openapi.programming-hero.com/api/ai/tools`
-    console.log(url)
+const loadtool =( sortClick,dataLimit) =>{
+     const url=`https://openapi.programming-hero.com/api/ai/tools`;
+     console.log(url)
     fetch(url)
     .then(res=>res.json())
     .then(data=>displayTool(data.data.tools,dataLimit));
 }
-// spinner
-// const toggleSpinner =isLoading =>{
-//   const loaderSection =document.getElementById('loader');
-//   if(isLoading){
-//       loaderSection.classList.remove('d-none')
-//   }
-//   else{
-//       loaderSection.classList.add('d-none')
-//   }
-// }
-
-
 
 
 // load card
-const displayTool=(tools)=>{
+const displayTool=(tools,dataLimit)=>{
    const toolContainer= document.getElementById('tool-container');
    const showAll=document.getElementById('show-all');
-   if(tools.length>6){
+   if( dataLimit && tools.length > 6){
     tools=tools.slice(0,6);
     showAll.classList.remove('d-none');
    }
@@ -33,11 +21,11 @@ const displayTool=(tools)=>{
 
 
    
-    // toolContainer.innerText='';
+    toolContainer.innerText='';
 
 // display all tools
 for (const tool of tools){
-  console.log(tool);
+     console.log(tool);
     const toolsDiv=document.createElement('div');
     toolsDiv.classList.add('col');
     
@@ -68,12 +56,31 @@ for (const tool of tools){
     `;
   toolContainer.appendChild(toolsDiv);
 };
-// toggoleSpinner(false);
+  toggleSpinner(false);
 }
+  const processSearch=(dataLimit)=>{
+    toggleSpinner(true);
+    loadtool(sortClick,dataLimit);
 
-  // document.getElementById('sort-btn').addEventListener('click',function(){
-  //   processSearch(6);
-  // })
-// modal
+  }
+  const sortClick= document.getElementById('sort-btn').addEventListener('click',function(){
+     processSearch(6);
+  
+     
+  })
+// spinner
+const toggleSpinner =isLoading =>{
+  const loaderSection =document.getElementById('loader');
+  if(isLoading){
+      loaderSection.classList.remove('d-none')
+  }
+  else{
+      loaderSection.classList.add('d-none');
+  }
+}
+document.getElementById('btn-show-all').addEventListener('click',function(){
+  processSearch();
+
+})
 
 loadtool();
