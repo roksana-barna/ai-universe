@@ -1,22 +1,28 @@
-const loadtool =() =>{
+const loadtool =(dataLimit) =>{
     url=`https://openapi.programming-hero.com/api/ai/tools`
     console.log(url)
     fetch(url)
     .then(res=>res.json())
-    .then(data=>displayTool(data.data.tools));
+    .then(data=>displayTool(data.data.tools,dataLimit));
 }
+// spinner
+// const toggleSpinner =isLoading =>{
+//   const loaderSection =document.getElementById('loader');
+//   if(isLoading){
+//       loaderSection.classList.remove('d-none')
+//   }
+//   else{
+//       loaderSection.classList.add('d-none')
+//   }
+// }
+
+
+
+
 // load card
 const displayTool=(tools)=>{
-    const toolContainer=document.getElementById('tool-container')
+   const toolContainer= document.getElementById('tool-container')
     // toolContainer.innerText='';
-    // const showAll=document.getElementById('show-all')
-//     if(dataLimit && tools.length > 10){
-//         tools=tools.slice(0,10);
-//         showAll.classList.remove('d-none');
-//     }
-//     else{
-//         showAll.classList.add('d-none');
-//     }
 
 // display all tools
 for (const tool of tools){
@@ -30,16 +36,16 @@ for (const tool of tools){
     <div class="card-body">
       <h4 class="fw-bold">Features</h4>
       <p class="card-text fw-light">
-                            1.Natural Language Processing<br>
-                            2.contextual understanding<br>
-                            3.Text generation<br>
+                      <li>1.${tool.features[0]}</li>
+                      <li>2.${tool.features[1]}</li>
+                      <li>3.${tool.features[2]}</li>
                             </p>
     </div>
     <div class="card-footer d-flex justify-content-between p-3">
     <div>
     <h5 class="card-title p-2 fw-bold">${tool.name}</h5>
     <i class="fa-regular fa-calendar px-2"></i>
-      <small class="text-muted">11/01/2022</small>
+      <small class="text-muted">${tool.published_in}</small>
       </div>
     <div>
       <i class="fa-solid fa-arrow-right bg-warning-subtle rounded-5 text-danger p-3
@@ -50,5 +56,12 @@ for (const tool of tools){
     `;
   toolContainer.appendChild(toolsDiv);
 };
+// toggoleSpinner(false);
 }
+
+  // document.getElementById('sort-btn').addEventListener('click',function(){
+  //   processSearch(6);
+  // })
+
+
 loadtool();
