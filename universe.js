@@ -21,7 +21,18 @@ const loadtool =(dataLimit) =>{
 
 // load card
 const displayTool=(tools)=>{
-   const toolContainer= document.getElementById('tool-container')
+   const toolContainer= document.getElementById('tool-container');
+   const showAll=document.getElementById('show-all');
+   if(tools.length>6){
+    tools=tools.slice(0,6);
+    showAll.classList.remove('d-none');
+   }
+   else{
+    showAll.classList.add('d-none');
+   }
+
+
+   
     // toolContainer.innerText='';
 
 // display all tools
@@ -50,9 +61,10 @@ for (const tool of tools){
     <div>
       <i class="fa-solid fa-arrow-right bg-warning-subtle rounded-5 text-danger p-3
 
-      mt-2"></i></div>
+      mt-2 data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i></div>
     </div>
 </div>
+ 
     `;
   toolContainer.appendChild(toolsDiv);
 };
@@ -62,6 +74,6 @@ for (const tool of tools){
   // document.getElementById('sort-btn').addEventListener('click',function(){
   //   processSearch(6);
   // })
-
+// modal
 
 loadtool();
