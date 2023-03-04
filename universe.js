@@ -45,7 +45,7 @@ for (const tool of tools){
     <div>
       <i onclick="loadToolDetails('${tool.id}')" class="fa-solid fa-arrow-right bg-warning-subtle rounded-5 text-danger p-3
 
-      mt-2 "data-bs-toggle="modal" data-bs-target="#modalDetail"></i></div>
+      mt-2 " data-bs-toggle="modal" data-bs-target="#exampleModal" class="modal"</i></div>
       
 
     </div>
@@ -78,16 +78,100 @@ document.getElementById('btn-show-all').addEventListener('click',function(){
   processSearch();
 
 })
-
+// det
 const loadToolDetails =(id)=>{
-  const url=`https://openapi.programming-hero.com/api/ai/tool/01`;
+  const url=`https://openapi.programming-hero.com/api/ai/tool/${id}`;
  fetch(url)
  .then(res=>res.json())
  .then (data=>displayToolDetail(data));
 }
 const displayToolDetail=tool=>{
     console.log(tool);
-    const modalTitle=document.getElementById('modal-head');
+    const modal=document.getElementById('modal');
+    modal.textContent='';
+    const div=document.createElement('div');
+    div.classList.add('modal-content');
+    div.innerHTML=`
+    <div class="modal-body">
+    <div class="closeBTN">
+        <button type="button" class="btn-close p-1 rounded bg-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div>
+            <div class="card h-100 p-3">
+                <h6 class="text-center">${tool.data.description}</h6>
+                <div class="row gap-1 mt-3">
+                    <div class="col">
+                        <a href="">
+                            <div class="card p-2">
+                                <p class="text-center packageTextColor mb-0">${tool.data.pricing[0].price}<br>month<br>Basic</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="">
+                            <div class="card p-2">
+                                <p class="text-center packageTextColor mb-0">${tool.data.pricing[1].price}<br>month<br>Pro</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="">
+                            <div class="card p-2">
+                                <p class="text-center packageTextColor mb-0">${tool.data.pricing[2].price}<br>us<br>Enterprise</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col">
+                            <div class="p-2">
+                                <h4>Features</h4>
+                                <ul>
+                                    <li>${tool.data.features[1].feature_name}</li>
+                                    <li>>${tool.data.features[2].feature_name}</li>
+                                    <li>>${tool.data.features[3].feature_name}</li>
+                                </ul>
+                            </div>
+                    </div>
+                    <div class="col">
+                        <div class="p-2">
+                            <h4>Integrations</h4>
+                            <ul>
+                                <li>${tool.data.integrations[0]}</li>
+                                <li>${tool.data.integrations[1]}</li>
+                                <li>${tool.data.integrations[2]}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="card h-100">
+                <div class="card text-bg-dark">
+                    <img src="${tool.data.image_link[0]}" class="card-img-top p-2" alt="img">
+                    <div class="card-img-overlay d-flex flex-column align-items-end">
+                        <span class="badge text-bg-danger">94% accuracy</span>
+                    </div>
+                </div>
+                <div class="card-body text-center">
+                     <h5 class="card=title">HI,How are you doiung today?</h5>
+                     <p>i m doing well,thank you for asking.How can i assist you today?</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+    `;
+    modal.appendChild(div);
+
+
   
 
 }
