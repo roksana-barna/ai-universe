@@ -43,9 +43,10 @@ for (const tool of tools){
       <small class="text-muted">${tool.published_in}</small>
       </div>
     <div>
+    
       <i onclick="loadToolDetails('${tool.id}')" class="fa-solid fa-arrow-right bg-warning-subtle rounded-5 text-danger p-3
 
-      mt-2 " data-bs-toggle="modal" data-bs-target="#exampleModal" class="modal"</i></div>
+      mt-2 " data-bs-toggle="modal" data-bs-target="#twentyModal" class="modal"></i></div>
       
 
     </div>
@@ -87,7 +88,7 @@ const loadToolDetails =(id)=>{
 }
 const displayToolDetail=tool=>{
     console.log(tool);
-    const modal=document.getElementById('modal');
+    const modal=document.getElementById('singleInfo');
     modal.textContent='';
     const div=document.createElement('div');
     div.classList.add('modal-content');
@@ -118,7 +119,7 @@ const displayToolDetail=tool=>{
                     <div class="col">
                         <a href="">
                             <div class="card p-2">
-                                <p class="text-center packageTextColor mb-0">${tool.data.pricing[2].price}<br>us<br>Enterprise</p>
+                                <p class="text-center packageTextColor mb-0">${tool.data.pricing[2] ? tool.data.pricing[2].price :"Free of cost"}<br>us<br>Enterprise</p>
                             </div>
                         </a>
                     </div>
