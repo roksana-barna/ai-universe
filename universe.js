@@ -5,8 +5,6 @@ const loadtool =( sortClick,dataLimit) =>{
     .then(res=>res.json())
     .then(data=>displayTool(data.data.tools,dataLimit));
 }
-
-
 // load card
 const displayTool=(tools,dataLimit)=>{
    const toolContainer= document.getElementById('tool-container');
@@ -19,8 +17,6 @@ const displayTool=(tools,dataLimit)=>{
     showAll.classList.add('d-none');
    }
 
-
-   
     toolContainer.innerText='';
 
 // display all tools
@@ -47,9 +43,11 @@ for (const tool of tools){
       <small class="text-muted">${tool.published_in}</small>
       </div>
     <div>
-      <i class="fa-solid fa-arrow-right bg-warning-subtle rounded-5 text-danger p-3
+      <i onclick="loadToolDetails('${tool.id}')" class="fa-solid fa-arrow-right bg-warning-subtle rounded-5 text-danger p-3
 
-      mt-2 data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i></div>
+      mt-2 "data-bs-toggle="modal" data-bs-target="#modalDetail"></i></div>
+      
+
     </div>
 </div>
  
@@ -64,9 +62,7 @@ for (const tool of tools){
 
   }
   const sortClick= document.getElementById('sort-btn').addEventListener('click',function(){
-     processSearch(6);
-  
-     
+     processSearch(6); 
   })
 // spinner
 const toggleSpinner =isLoading =>{
@@ -83,4 +79,16 @@ document.getElementById('btn-show-all').addEventListener('click',function(){
 
 })
 
+const loadToolDetails =(id)=>{
+  const url=`https://openapi.programming-hero.com/api/ai/tool/01`;
+ fetch(url)
+ .then(res=>res.json())
+ .then (data=>displayToolDetail(data));
+}
+const displayToolDetail=tool=>{
+    console.log(tool);
+    const modalTitle=document.getElementById('modal-head');
+  
+
+}
 loadtool();
