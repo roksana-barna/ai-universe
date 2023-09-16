@@ -157,7 +157,7 @@ const displayToolDetail=tool=>{
                     </div>
                 </div>
                 <div class="card-body text-center">
-                     <h5 class="card=title">HI,How are you doiung today?</h5>
+                     <h5 class="card=title">HI,How are you doing today?</h5>
                      <p>i m doing well,thank you for asking.How can i assist you today?</p>
 
                 </div>
